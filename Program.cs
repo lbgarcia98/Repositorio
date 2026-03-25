@@ -1,7 +1,26 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using ProyectoUniversidad.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//desde aca
+var connectionString =
+     builder.Configuration.GetConnectionString
+     ("DefaultConnection");
+
+builder.Services.AddDbContext<AppDbContext>
+        (options => options.UseSqlServer
+        (connectionString), ServiceLifetime.Transient);
+
+builder.Services.AddDefaultIdentity<IdentityUser>
+    (options =>
+    options.SignIn.RequireConfirmedAccount =
+    false).AddEntityFrameworkStores<AppDbContext>();
+
 
 var app = builder.Build();
 
