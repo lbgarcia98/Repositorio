@@ -1,0 +1,110 @@
+﻿@page
+@model LoginModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Log in";
+}
+
+            @*NO AGREGAR NADA EN FORMS TRIO DE MULAS*@
+            
+            
+            @*Ingreso de LOGIN*@
+            <!DOCTYPE html>
+            <html lang="en">
+
+
+            <head>
+
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <title>Star Admin2  Pro Premium Bootstrap Admin Dashboard Template</title>
+                <link rel="stylesheet" href="~/vendors/feather/feather.css">
+                <link rel="stylesheet" href="~/vendors/mdi/css/materialdesignicons.min.css">
+                <link rel="stylesheet" href="~/vendors/ti-icons/css/themify-icons.css">
+                <link rel="stylesheet" href="~/vendors/typicons/typicons.css">
+                <link rel="stylesheet" href="~/vendors/simple-line-icons/css/simple-line-icons.css">
+                <link rel="stylesheet" href="~/vendors/css/vendor.bundle.base.css">
+
+                <link rel="stylesheet" href="~/css/horizontal-layout-dark/style.css">
+
+                <link rel="shortcut icon" href="~/images/favicon.png" />
+            </head>
+
+            <body>
+                <div class="container-scroller">
+                    <div class="container-fluid page-body-wrapper full-page-wrapper">
+                        <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
+                            <div class="row flex-grow">
+                                <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                                    <div class="auth-form-transparent text-left p-3">
+                                        <div class="brand-logo">
+                                <img src="~/images/logo.svg" alt="logo">
+                                        </div>
+                                        <h4>Welcome back!</h4>
+                                        <h6 class="fw-light">Happy to see you again!</h6>
+                                        <form id="account" method="post">
+                                            <h2>Use a local account to log in.</h2>
+                                            <hr />
+                                            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                                            <div class="form-floating mb-3">
+                                                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                                                <label asp-for="Input.Email" class="form-label">Email</label>
+                                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                                                <label asp-for="Input.Password" class="form-label">Password</label>
+                                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                            </div>
+                                            <div class="checkbox mb-3">
+                                                <label asp-for="Input.RememberMe" class="form-label">
+                                                    <input class="form-check-input" asp-for="Input.RememberMe" />
+                                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                                                </p>
+                                                <p>
+                                                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                                                </p>
+                                                <p>
+                                                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                                                </p>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 login-half-bg d-flex flex-row">
+                                    <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; 2021  All rights reserved.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+    <script src="~/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+    <script src="~/js/off-canvas.js"></script>
+    <script src="~/js/hoverable-collapse.js"></script>
+    <script src="~/js/template.js"></script>
+    <script src="~/js/settings.js"></script>
+    <script src="~/js/todolist.js"></script>
+
+            </body>
+
+        </html>
+        @*Fin de ingreso de LOGIN*@
+       
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

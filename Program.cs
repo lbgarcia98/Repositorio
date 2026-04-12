@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProyectoUniversidad.Models;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,12 +38,18 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); //Linea agregada para iniciar sesión
+app.UseAuthentication(); //Linea agregada para iniciar sesiï¿½n
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();

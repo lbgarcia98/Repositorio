@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ProyectoUniversidad.Models
 {
-    public class AppDbContext
-    {
-        public class  AppDbContext :
+        public class AppDbContext :
             IdentityDbContext<IdentityUser>
         {
             public AppDbContext
@@ -15,5 +14,4 @@ namespace ProyectoUniversidad.Models
 
             }
         }
-    }
 }
