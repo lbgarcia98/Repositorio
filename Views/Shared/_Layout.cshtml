@@ -25,6 +25,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" asp-area="Identity" asp-controller="Account" asp-action="Logout">
+                                Cerrar Sesión
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -37,10 +42,7 @@
     </div>
 
     @*INGRESO DE LOGOUT*@
-    <a class="dropdown-item" asp-area="Identity" asp-controller="Account" asp-action="Logout">
-        <i class="dropdown-item-icon mdi-power text-primary me-2"></i>
-        Cerrar Sesión
-    </a>
+ 
 
     <footer class="border-top footer text-muted">
         <div class="container">
