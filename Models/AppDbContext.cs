@@ -5,7 +5,7 @@ namespace ProyectoUniversidad.Models
 {
     public class AppDbContext
     {
-        public class  AppDbContext:
+        public class  AppDbContext :
             IdentityDbContext<IdentityUser>
         {
             public AppDbContext

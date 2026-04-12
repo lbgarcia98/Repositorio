@@ -1,9 +1,11 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoUniversidad.Models;
 
 namespace ProyectoUniversidad.Controllers
 {
+    [Authorize] //Etiqueta para agregar autenticación.
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

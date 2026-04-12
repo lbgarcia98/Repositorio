@@ -37,6 +37,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); //Linea agregada para iniciar sesión
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
