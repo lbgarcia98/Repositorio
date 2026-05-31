@@ -21,5 +21,6 @@ namespace ProyectoUniversidad.Models
         {
             get; set;
         }
+
     }
 }
