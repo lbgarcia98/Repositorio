@@ -1,0 +1,42 @@
+@model ProyectoUniversidad.Models.AdminDeleteViewModel
+
+@{
+    ViewData["Title"] = $"Eliminar {Model.Entity.SingularName}";
+}
+
+<section class="form-page">
+    <div class="form-header">
+        <div>
+            <span class="section-kicker">@Model.Entity.PluralName</span>
+            <h1>Eliminar @Model.Entity.SingularName</h1>
+            <p>Confirma la eliminacion del registro seleccionado.</p>
+        </div>
+        <a class="btn btn-outline-secondary" asp-action="Index" asp-route-entity="@Model.Entity.Key">
+            <i class="mdi mdi-arrow-left"></i>
+            Volver
+        </a>
+    </div>
+
+    <div class="delete-panel">
+        <div class="delete-warning">
+            <i class="mdi mdi-alert-circle-outline"></i>
+            <span>Esta accion eliminara el registro de la base de datos.</span>
+        </div>
+
+        <dl class="detail-list">
+            @foreach (var field in Model.Fields)
+            {
+                <dt>@field.Label</dt>
+                <dd>@Model.Values[field.Name]</dd>
+            }
+        </dl>
+
+        <form asp-action="Delete" asp-route-entity="@Model.Entity.Key" asp-route-id="@Model.KeyValue" method="post">
+            <button class="btn btn-danger" type="submit">
+                <i class="mdi mdi-trash-can-outline"></i>
+                Eliminar
+            </button>
+            <a class="btn btn-outline-secondary" asp-action="Index" asp-route-entity="@Model.Entity.Key">Cancelar</a>
+        </form>
+    </div>
+</section>

@@ -1,8 +1,95 @@
-﻿@{
-    ViewData["Title"] = "UNIVERSIDAD DEL FUTURO";
+@model ProyectoUniversidad.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Bienvenido a la plataforma Universidad del Futuro</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="dashboard-header">
+    <div>
+        <span class="section-kicker">Panel institucional</span>
+        <h1>Universidad del Futuro</h1>
+        <p>Indicadores generales y accesos para alimentar la base de datos academica.</p>
+    </div>
+    <div class="dashboard-header-actions">
+        <a class="btn btn-primary" asp-controller="Administracion" asp-action="Index">
+            <i class="mdi mdi-database-plus"></i>
+            Gestionar datos
+        </a>
+        <a class="btn btn-outline-secondary" asp-controller="Administracion" asp-action="Create" asp-route-entity="Estudiantes">
+            <i class="mdi mdi-account-plus"></i>
+            Nuevo estudiante
+        </a>
+    </div>
+</section>
+
+<section class="metric-grid">
+    @foreach (var metric in Model.PrimaryMetrics)
+    {
+        <a class="metric-card @metric.AccentCss" asp-controller="Administracion" asp-action="Index" asp-route-entity="@metric.EntityKey">
+            <span class="metric-icon"><i class="@metric.IconCss"></i></span>
+            <span class="metric-body">
+                <span class="metric-label">@metric.Title</span>
+                <strong>@metric.Value</strong>
+                <span class="metric-hint">@metric.Hint</span>
+            </span>
+        </a>
+    }
+</section>
+
+<section class="dashboard-band">
+    <div class="dashboard-panel dashboard-panel-wide">
+        <div class="panel-heading">
+            <div>
+                <span class="section-kicker">Resumen operativo</span>
+                <h2>Base de datos universitaria</h2>
+            </div>
+            <span class="total-pill">@Model.TotalRecords registros</span>
+        </div>
+        <div class="entity-grid">
+            @foreach (var entity in Model.EntitySummaries)
+            {
+                <a class="entity-tile @entity.AccentCss" asp-controller="Administracion" asp-action="Index" asp-route-entity="@entity.EntityKey">
+                    <span class="entity-icon"><i class="@entity.IconCss"></i></span>
+                    <span>
+                        <strong>@entity.PluralName</strong>
+                        <small>@entity.Description</small>
+                    </span>
+                    <em>@entity.Count</em>
+                </a>
+            }
+        </div>
+    </div>
+
+    <aside class="dashboard-panel">
+        <div class="panel-heading">
+            <div>
+                <span class="section-kicker">Academico</span>
+                <h2>Indicadores clave</h2>
+            </div>
+        </div>
+
+        <div class="compact-metrics">
+            @foreach (var metric in Model.AcademicMetrics)
+            {
+                <a class="compact-metric @metric.AccentCss" asp-controller="Administracion" asp-action="Index" asp-route-entity="@metric.EntityKey">
+                    <i class="@metric.IconCss"></i>
+                    <span>
+                        <strong>@metric.Value</strong>
+                        <small>@metric.Title</small>
+                    </span>
+                </a>
+            }
+        </div>
+
+        <div class="status-strip">
+            <span>
+                <strong>@Model.TotalAcademicOffer</strong>
+                oferta academica
+            </span>
+            <span>
+                <strong>@Model.ActiveCycles</strong>
+                ciclos activos
+            </span>
+        </div>
+    </aside>
+</section>

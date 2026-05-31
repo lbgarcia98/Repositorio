@@ -1,0 +1,102 @@
+@model ProyectoUniversidad.Models.AdminTableViewModel
+
+@{
+    ViewData["Title"] = Model.Entity.PluralName;
+}
+
+<section class="data-layout">
+    <aside class="data-sidebar">
+        <div class="data-sidebar-heading">
+            <span class="section-kicker">Base de datos</span>
+            <h1>Administracion</h1>
+        </div>
+
+        <nav class="entity-nav" aria-label="Tablas disponibles">
+            @foreach (var entity in Model.Entities)
+            {
+                var activeClass = entity.Key == Model.Entity.Key ? "active" : string.Empty;
+                <a class="@activeClass" asp-controller="Administracion" asp-action="Index" asp-route-entity="@entity.Key">
+                    <i class="@entity.IconCss"></i>
+                    <span>@entity.PluralName</span>
+                </a>
+            }
+        </nav>
+    </aside>
+
+    <section class="data-main">
+        <div class="table-header">
+            <div>
+                <span class="section-kicker">@Model.Entity.SingularName</span>
+                <h1>@Model.Entity.PluralName</h1>
+                <p>@Model.Entity.Description</p>
+            </div>
+            <a class="btn btn-primary" asp-action="Create" asp-route-entity="@Model.Entity.Key">
+                <i class="mdi mdi-plus"></i>
+                Nuevo registro
+            </a>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(Model.StatusMessage))
+        {
+            <div class="alert alert-success app-alert" role="alert">
+                <i class="mdi mdi-check-circle-outline"></i>
+                @Model.StatusMessage
+            </div>
+        }
+
+        <div class="table-shell">
+            <div class="table-summary">
+                <span>@Model.TotalCount registros encontrados</span>
+                <span>Mostrando hasta 100 registros</span>
+            </div>
+
+            @if (Model.Rows.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table app-table align-middle">
+                        <thead>
+                            <tr>
+                                @foreach (var field in Model.Fields)
+                                {
+                                    <th>@field.Label</th>
+                                }
+                                <th class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in Model.Rows)
+                            {
+                                <tr>
+                                    @foreach (var field in Model.Fields)
+                                    {
+                                        <td>@row.Values[field.Name]</td>
+                                    }
+                                    <td class="text-end action-cell">
+                                        <a class="icon-action" title="Editar" asp-action="Edit" asp-route-entity="@Model.Entity.Key" asp-route-id="@row.KeyValue">
+                                            <i class="mdi mdi-pencil"></i>
+                                        </a>
+                                        <a class="icon-action danger" title="Eliminar" asp-action="Delete" asp-route-entity="@Model.Entity.Key" asp-route-id="@row.KeyValue">
+                                            <i class="mdi mdi-trash-can-outline"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="empty-state">
+                    <i class="@Model.Entity.IconCss"></i>
+                    <h2>No hay registros todavia</h2>
+                    <p>Agrega el primer registro para empezar a alimentar esta tabla.</p>
+                    <a class="btn btn-primary" asp-action="Create" asp-route-entity="@Model.Entity.Key">
+                        <i class="mdi mdi-plus"></i>
+                        Crear registro
+                    </a>
+                </div>
+            }
+        </div>
+    </section>
+</section>

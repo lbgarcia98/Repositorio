@@ -1,54 +1,65 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ProyectoUniversidad</title>
+    <title>@ViewData["Title"] - Universidad del Futuro</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/vendors/mdi/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ProyectoUniversidad.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ProyectoUniversidad</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="dropdown-item" asp-area="Identity" asp-controller="Account" asp-action="Logout">
-                                Cerrar Sesión
-                            </a>
-                        </li>
-                    </ul>
+    <div class="app-shell">
+        <aside class="app-sidebar">
+            <a class="app-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <span class="brand-mark">UF</span>
+                <span>
+                    <strong>Universidad</strong>
+                    <small>del Futuro</small>
+                </span>
+            </a>
+
+            <nav class="app-nav" aria-label="Navegacion principal">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="mdi mdi-view-dashboard-outline"></i>
+                    Dashboard
+                </a>
+                <a asp-area="" asp-controller="Administracion" asp-action="Index">
+                    <i class="mdi mdi-database-cog-outline"></i>
+                    Base de datos
+                </a>
+                <a asp-area="" asp-controller="Administracion" asp-action="Index" asp-route-entity="Estudiantes">
+                    <i class="mdi mdi-school-outline"></i>
+                    Estudiantes
+                </a>
+                <a asp-area="" asp-controller="Administracion" asp-action="Index" asp-route-entity="Docentes">
+                    <i class="mdi mdi-human-male-board"></i>
+                    Docentes
+                </a>
+                <a asp-area="" asp-controller="Administracion" asp-action="Index" asp-route-entity="Asignaturas">
+                    <i class="mdi mdi-book-open-page-variant-outline"></i>
+                    Asignaturas
+                </a>
+            </nav>
+        </aside>
+
+        <div class="app-content">
+            <header class="app-topbar">
+                <div>
+                    <span class="topbar-label">Sistema academico</span>
+                    <strong>@ViewData["Title"]</strong>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+                <partial name="_LoginPartial" />
+            </header>
+
+            <main class="app-main" role="main">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
-    @*INGRESO DE LOGOUT*@
- 
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - ProyectoUniversidad - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
